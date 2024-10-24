@@ -1,0 +1,87 @@
+/* General Styles */
+* {
+    box-sizing: border-box; /* Ensure padding and border are included in width/height */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* Light text color */
+    margin: 0; /* Remove default margin */
+}
+
+/* App Container */
+#app {
+    display: flex; /* Use flexbox for layout */
+    height: 100vh; /* Full height of the viewport */
+}
+
+/* Recently Played Section */
+#recently-played {
+    width: 250px; /* Fixed width for the recently played section */
+    padding: 10px;
+    background-color: #1e1e1e; /* Darker background for contrast */
+    border-right: 1px solid #333; /* Separator line */
+    overflow-y: auto; /* Allow scrolling if content overflows */
+    /* Hide scrollbar */
+    scrollbar-width: none; /* For Firefox */
+}
+
+#recently-played::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari, and Edge */
+}
+
+/* Current Info Section */
+#current-info {
+    flex: 1; /* Take up remaining space */
+    display: flex; /* Use flexbox for centering */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    background-color: #1e1e1e; /* Darker background for contrast */
+}
+
+/* Recently Played List */
+#recent-songs-list {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+}
+
+#recent-songs-list li {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center vertically */
+    margin: 5px 0; /* Space between songs */
+}
+
+#recent-songs-list img {
+    width: 50px; /* Set a fixed width for the album cover */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between image and text */
+}
+
+/* Button Styles */
+#login, #logout {
+    background-color: #1db954; /* Spotify green */
+    color: white; /* Text color */
+    border: none; /* Remove default border */
+    padding: 10px 20px; /* Padding */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    font-size: 16px; /* Font size */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+#logout {
+    position: absolute;
+    top: 10px;
+    right: 10px; /* Position logout button */
+}
+
+button:hover {
+    background-color: #1aa34a; /* Darker green on hover */
+}
+
+/* Centering and Text Alignment */
+#app {
+    text-align: center; /* Center text within the app */
+}

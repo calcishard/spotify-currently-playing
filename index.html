@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Currently Playing</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+</head>
+<body>
+    <div id="app">
+        <div id="recently-played">
+            <h2 id ="recently-played">Recently Played</h2>
+            <ul id="recent-songs-list"></ul> <!-- List for recently played songs -->
+        </div>
+        <div id="current-info">
+            <h1 id="currently-playing">Currently Playing</h1>
+            <button id="logout">Logout</button>
+            <div id="song-info">
+                <img id="album-cover" src="" alt="Album Cover" style="width: 200px; height: 200px; margin-bottom: 10px;">
+                <p id="song-title">No song playing</p>
+                <p id="artist-name"></p>
+            </div>
+            <button id="login">Login to Spotify</button> <!-- Login button -->
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
