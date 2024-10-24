@@ -1,34 +1,67 @@
 /* General Styles */
 * {
     box-sizing: border-box; /* Ensure padding and border are included in width/height */
+    margin: 0; /* Remove default margin */
 }
 
 body {
     font-family: Arial, sans-serif;
     background-color: #121212; /* Dark background */
     color: #ffffff; /* Light text color */
-    margin: 0; /* Remove default margin */
 }
 
 /* App Container */
 #app {
     display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack sections vertically */
     height: 100vh; /* Full height of the viewport */
 }
 
 /* Recently Played Section */
 #recently-played {
-    width: 250px; /* Fixed width for the recently played section */
+    width: 100%; /* Full width on mobile */
+    max-width: 300px; /* Max width on larger screens */
     padding: 10px;
     background-color: #1e1e1e; /* Darker background for contrast */
     border-right: 1px solid #333; /* Separator line */
-    overflow-y: auto; /* Allow scrolling if content overflows */
-    /* Hide scrollbar */
+    overflow-y: auto; /* Allow vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
     scrollbar-width: none; /* For Firefox */
+    position: relative; /* Positioning context for absolute children */
 }
 
 #recently-played::-webkit-scrollbar {
     display: none; /* For Chrome, Safari, and Edge */
+}
+
+/* Recently Played List */
+#recent-songs-list {
+    margin: 0; /* Remove margin */
+    padding: 0; /* Remove padding */
+    list-style-type: none; /* Remove default list styles */
+    max-height: calc(100vh - 200px); /* Limit height to avoid overflow */
+    overflow-y: auto; /* Allow vertical scrolling within the list */
+}
+
+#recent-songs-list li {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center vertically */
+    margin: 5px 0; /* Space between songs */
+    padding: 5px; /* Add some padding */
+    width: 100%; /* Ensure list item takes full width */
+    overflow: hidden; /* Prevent overflow */
+    font-size: 14px; /* Smaller font size */
+}
+
+#recent-songs-list img {
+    width: 40px; /* Set a smaller width for the album cover */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between image and text */
+}
+
+/* Add a hover effect for better interactivity */
+#recent-songs-list li:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light background on hover */
 }
 
 /* Current Info Section */
@@ -39,24 +72,6 @@ body {
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
     background-color: #1e1e1e; /* Darker background for contrast */
-}
-
-/* Recently Played List */
-#recent-songs-list {
-    list-style-type: none; /* Remove default list styles */
-    padding: 0; /* Remove default padding */
-}
-
-#recent-songs-list li {
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center vertically */
-    margin: 5px 0; /* Space between songs */
-}
-
-#recent-songs-list img {
-    width: 50px; /* Set a fixed width for the album cover */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Space between image and text */
 }
 
 /* Button Styles */
@@ -81,7 +96,31 @@ button:hover {
     background-color: #1aa34a; /* Darker green on hover */
 }
 
-/* Centering and Text Alignment */
-#app {
-    text-align: center; /* Center text within the app */
+/* Media Queries */
+@media (max-width: 600px) {
+    #app {
+        flex-direction: column; /* Stack sections vertically */
+    }
+
+    #recently-played {
+        width: 100%; /* Full width on mobile */
+        border-right: none; /* Remove right border */
+        border-bottom: 1px solid #333; /* Add bottom border */
+    }
+
+    #current-info {
+        width: 100%; /* Full width on mobile */
+        padding: 10px; /* Add padding */
+    }
+
+    #album-cover {
+        width: 150px; /* Smaller album cover */
+        height: 150px; /* Maintain aspect ratio */
+    }
+
+    /* Adjust button sizes for mobile */
+    #login, #logout {
+        width: 100%; /* Full width buttons */
+        margin-top: 10px; /* Space between buttons */
+    }
 }
