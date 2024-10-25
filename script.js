@@ -1,5 +1,5 @@
 const CLIENT_ID = '8af5d68c29394b498a58679e13e1d03b';
-const REDIRECT_URI = 'https://cheerful-bienenstitch-329df4.netlify.app/'; // Ensure this matches your Spotify app settings
+const REDIRECT_URI = 'http://127.0.0.1:5500/spotify-currently-playing/index.html'; // Ensure this matches your Spotify app settings
 const SCOPES = 'user-read-currently-playing user-read-recently-played';
 let accessToken;
 let fetchInterval;
@@ -35,7 +35,7 @@ if (hash) {
     fetchCurrentlyPlaying(token);
     fetchRecentSongs(token);
     fetchInterval = setInterval(() => fetchCurrentlyPlaying(token), 1000);
-    recentSongsInterval = setInterval(() => fetchRecentSongs(token), 1000);
+    recentSongsInterval = setInterval(() => fetchRecentSongs(token), 5000);
     loginButton.style.display = 'none';
     logoutButton.style.display = 'block';
     songInfo.style.display = 'block';
