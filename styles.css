@@ -119,10 +119,7 @@ button:hover {
 
 #song-details {
     display: flex; /* Use flexbox for song details */
-    flex-direction: column; /* Stack title and artist vertically */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text */
-    margin-top: 10px; /* Space above the details */
+    align-items: center; /* Center vertically */
 }
 
 /* Updated Song Title and Artist Name Styles */
@@ -132,6 +129,10 @@ button:hover {
     margin: 0; /* Remove default margin */
     color: #ffffff; /* Set desired text color for links */
     text-decoration: none; /* Remove underline from links */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    max-width: 200px; /* Set a maximum width */
 }
 
 #song-info #artist-name {
@@ -139,6 +140,18 @@ button:hover {
     font-weight: normal; /* Normal font weight for artist */
     color: #b3b3b3; /* Lighter color for artist name */
     margin: 0; /* Remove default margin */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    max-width: 200px; /* Set a maximum width */
+}
+
+/* Album Cover */
+#album-cover {
+    width: 100px; /* Fixed width for the album cover */
+    height: 100px; /* Fixed height for the album cover */
+    object-fit: cover; /* Ensure the image covers the area */
+    margin-right: 15px; /* Space between the image and text */
 }
 
 /* Style for hyperlinks in song titles */
