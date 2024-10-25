@@ -3,6 +3,39 @@
     box-sizing: border-box; /* Ensure padding and border are included in width/height */
 }
 
+/* Recently Played List */
+#recent-songs-list {
+    list-style-type: none; /* Remove default list styles */
+    padding: 0; /* Remove default padding */
+}
+
+#recent-songs-list li {
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Center vertically */
+    margin: 5px 0; /* Space between songs */
+}
+
+#recent-songs-list img {
+    width: 50px; /* Set a fixed width for the album cover */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 10px; /* Space between image and text */
+}
+
+/* Style for Recently Played Songs and Artists */
+#recent-songs-list li .song-title {
+    font-family: Arial, sans-serif; /* Matching font */
+    font-weight: bold;
+    font-size: 15px; /* Font size */
+    color: #ffffff; /* Consistent text color */
+}
+
+#recent-songs-list li .artist-name {
+    font-family: Arial, sans-serif; /* Matching font */
+    font-weight: normal; /* Normal for artist */
+    font-size: 16px; /* Font size */
+    color: #b3b3b3; /* Slightly lighter color for artist */
+}
+
 body {
     font-family: Arial, sans-serif;
     background-color: #121212; /* Dark background */
@@ -23,7 +56,6 @@ body {
     background-color: #1e1e1e; /* Darker background for contrast */
     border-right: 1px solid #333; /* Separator line */
     overflow-y: auto; /* Allow scrolling if content overflows */
-    /* Hide scrollbar */
     scrollbar-width: none; /* For Firefox */
 }
 
@@ -39,24 +71,6 @@ body {
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
     background-color: #1e1e1e; /* Darker background for contrast */
-}
-
-/* Recently Played List */
-#recent-songs-list {
-    list-style-type: none; /* Remove default list styles */
-    padding: 0; /* Remove default padding */
-}
-
-#recent-songs-list li {
-    display: flex; /* Use flexbox for alignment */
-    align-items: center; /* Center vertically */
-    margin: 5px 0; /* Space between songs */
-}
-
-#recent-songs-list img {
-    width: 50px; /* Set a fixed width for the album cover */
-    height: auto; /* Maintain aspect ratio */
-    margin-right: 10px; /* Space between image and text */
 }
 
 /* Button Styles */
@@ -81,7 +95,66 @@ button:hover {
     background-color: #1aa34a; /* Darker green on hover */
 }
 
-/* Centering and Text Alignment */
-#app {
-    text-align: center; /* Center text within the app */
+/* Slider Styles */
+#slider-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    margin-top: 20px; /* Space above the slider */
+}
+
+/* Time Display */
+#time-container {
+    display: flex; /* Use flexbox to arrange time displays */
+    justify-content: space-between; /* Space them out */
+    width: 100%; /* Full width for alignment */
+    padding: 0 20px; /* Side padding */
+}
+
+/* Song Info Styles */
+#song-info {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center items horizontally */
+}
+
+#song-details {
+    display: flex; /* Use flexbox for song details */
+    flex-direction: column; /* Stack title and artist vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+    margin-top: 10px; /* Space above the details */
+}
+
+/* Updated Song Title and Artist Name Styles */
+#song-info #song-title {
+    font-size: 18px; /* Font size for song title */
+    font-weight: bold; /* Bold font for song title */
+    margin: 0; /* Remove default margin */
+    color: #ffffff; /* Set desired text color for links */
+    text-decoration: none; /* Remove underline from links */
+}
+
+#song-info #artist-name {
+    font-size: 16px; /* Slightly smaller font size for artist name */
+    font-weight: normal; /* Normal font weight for artist */
+    color: #b3b3b3; /* Lighter color for artist name */
+    margin: 0; /* Remove default margin */
+}
+
+/* Style for hyperlinks in song titles */
+#recent-songs-list a,
+#currently-playing a {
+    color: #ffffff; /* Set desired text color for links */
+    text-decoration: none; /* Remove underline from links */
+}
+
+#recent-songs-list a:hover,
+#currently-playing a:hover {
+    text-decoration: none; /* Add underline on hover for better UX */
+}
+
+/* Make sure parent text color is consistent */
+#currently-playing,
+#recent-songs-list {
+    color: #ffffff; /* Set desired text color */
 }
