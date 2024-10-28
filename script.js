@@ -1,9 +1,9 @@
 const CLIENT_ID = '8af5d68c29394b498a58679e13e1d03b';
-const REDIRECT_URI = 'http://127.0.0.1:5500/index.html';
+const REDIRECT_URI = 'http://127.0.0.1:5500/index.html'; // Ensure this matches your Spotify app settings
 const SCOPES = 'user-read-currently-playing user-read-recently-played';
 let accessToken;
 let fetchInterval;
-let recentSongsInterval;
+let recentSongsInterval; // Interval for recently played songs
 
 const loginButton = document.getElementById('login');
 const logoutButton = document.getElementById('logout');
@@ -16,17 +16,22 @@ const currentTimeDisplay = document.getElementById('current-time');
 const totalTimeDisplay = document.getElementById('total-time');
 const songSlider = document.getElementById('song-slider');
 
+// Initially hide elements
 logoutButton.style.display = 'none';
+songInfo.style.display = 'none';
+recentlyPlayed.style.display = 'none';
 
+// Login button click event
 loginButton.addEventListener('click', () => {
     const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=token`;
     window.location.href = authUrl;
 });
 
+// Handle the redirect and extract the access token
 const hash = window.location.hash;
 if (hash) {
     const token = hash.split('&')[0].split('=')[1];
-    accessToken = token;
+    accessToken = token; // Store the access token
     fetchCurrentlyPlaying(token);
     fetchRecentSongs(token);
     fetchInterval = setInterval(() => fetchCurrentlyPlaying(token), 1000);
@@ -38,6 +43,7 @@ if (hash) {
     document.getElementById('lyrics-container').style.display = 'block';
 }
 
+// Logout functionality
 logoutButton.addEventListener('click', () => {
     accessToken = null;
     clearInterval(fetchInterval);
@@ -51,10 +57,11 @@ logoutButton.addEventListener('click', () => {
     document.getElementById('album-cover').src = '';
     recentSongsList.innerHTML = '';
     recentlyPlayed.style.display = 'none';
-    sliderContainer.style.display = 'none';
+    sliderContainer.style.display = 'none'; // Hide slider when logged out
     document.getElementById('lyrics-container').style.display = 'none';
 });
 
+// Fetch currently playing song
 async function fetchCurrentlyPlaying(token) {
     try {
         const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
@@ -66,11 +73,16 @@ async function fetchCurrentlyPlaying(token) {
             if (data && data.is_playing) {
                 const songTitle = data.item.name;
                 const artistName = data.item.artists[0].name;
+
+                // Set song title as a hyperlink
                 document.getElementById('song-title').innerHTML = `<a href="${data.item.external_urls.spotify}" target="_blank">${songTitle}</a>`;
                 document.getElementById('artist-name').innerHTML = `<span class="artist-name">${data.item.artists.map(artist => artist.name).join(', ')}</span>`;
                 document.getElementById('album-cover').src = data.item.album.images[0].url;
+
+                // Fetch lyrics
                 fetchLyrics(songTitle, artistName);
 
+                // Update slider and time display
                 const duration = data.item.duration_ms;
                 const progress = data.progress_ms;
                 songSlider.max = duration;
@@ -92,6 +104,7 @@ async function fetchCurrentlyPlaying(token) {
     }
 }
 
+// Fetch recently played songs
 async function fetchRecentSongs(token) {
     try {
         const response = await fetch('https://api.spotify.com/v1/me/player/recently-played', {
@@ -100,7 +113,7 @@ async function fetchRecentSongs(token) {
         
         if (response.ok) {
             const data = await response.json();
-            recentSongsList.innerHTML = '';
+            recentSongsList.innerHTML = ''; // Clear the list
             data.items.forEach(item => {
                 const li = document.createElement('li');
                 li.innerHTML = `
@@ -120,6 +133,7 @@ async function fetchRecentSongs(token) {
     }
 }
 
+// Fetch lyrics for the currently playing song
 async function fetchLyrics(songTitle, artistName) {
     try {
         const response = await fetch(`https://api.lyrics.ovh/v1/${artistName}/${songTitle}`);
@@ -136,11 +150,13 @@ async function fetchLyrics(songTitle, artistName) {
     }
 }
 
+// Update time displays
 function updateTimeDisplays(currentTime, totalTime) {
     currentTimeDisplay.textContent = formatTime(currentTime);
     totalTimeDisplay.textContent = formatTime(totalTime);
 }
 
+// Format time in mm:ss
 function formatTime(milliseconds) {
     const minutes = Math.floor((milliseconds / 1000) / 60);
     const seconds = Math.floor((milliseconds / 1000) % 60);

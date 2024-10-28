@@ -14,11 +14,15 @@
         </div>
         <div id="current-info">
             <h1 id="currently-playing">Currently Playing</h1>
-            <button id="logout" style="position: absolute; top: 10px; right: 10px;">Logout</button>
+            <button id="logout">Logout</button> <!-- Logout button -->
             <div id="song-info">
                 <img id="album-cover" src="" alt="Album Cover" style="width: 200px; height: 200px; margin-bottom: 10px;">
-                <p id="song-title">No song playing</p>
-                <p id="artist-name"></p>
+                <div id="song-details">
+                    <p id="song-title">
+                        <a href="#" id="song-link">No song playing</a>
+                    </p>
+                    <p id="artist-name">Artist Name</p>
+                </div>
             </div>
             <button id="login">Login to Spotify</button> <!-- Login button -->
             <div id="slider-container" style="display: none;"> <!-- Initially hidden -->
