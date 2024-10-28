@@ -3,6 +3,14 @@
     box-sizing: border-box; /* Ensure padding and border are included in width/height */
 }
 
+/* Main Container Flexbox Setup */
+#main-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    height: 100vh; /* Full height of the viewport */
+}
+
 /* Recently Played List */
 #recent-songs-list {
     list-style-type: none; /* Remove default list styles */
@@ -36,6 +44,7 @@
     color: #b3b3b3; /* Slightly lighter color for artist */
 }
 
+/* Body and App Container Styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #121212; /* Dark background */
@@ -70,7 +79,25 @@ body {
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
+    background-color: #121212; /* Match the body background color */
+}
+
+/* Lyrics Container */
+#lyrics-container {
+    width: 300px; /* Fixed width for lyrics section */
+    padding: 10px;
     background-color: #1e1e1e; /* Darker background for contrast */
+    border-left: 1px solid #333; /* Separator line */
+    overflow-y: auto; /* Allow scrolling if lyrics overflow */
+    scrollbar-width: none; /* For Firefox */
+    color: #ffffff; /* White text color */
+}
+
+/* Lyrics Text Styling */
+#lyrics {
+    white-space: pre-wrap; /* Preserve line breaks in lyrics */
+    line-height: 1.5em; /* Adjust line height for spacing */
+    margin-top: 10px; /* Add a top margin */
 }
 
 /* Button Styles */
@@ -132,6 +159,10 @@ button:hover {
     margin: 0; /* Remove default margin */
     color: #ffffff; /* Set desired text color for links */
     text-decoration: none; /* Remove underline from links */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
 #song-info #artist-name {
@@ -139,6 +170,10 @@ button:hover {
     font-weight: normal; /* Normal font weight for artist */
     color: #b3b3b3; /* Lighter color for artist name */
     margin: 0; /* Remove default margin */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
 /* Style for hyperlinks in song titles */
@@ -157,4 +192,24 @@ button:hover {
 #currently-playing,
 #recent-songs-list {
     color: #ffffff; /* Set desired text color */
+}
+
+#song-title a:link {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#song-title a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#song-title a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#song-title a:active {
+    color: #ffffff;
+    text-decoration: none;
 }
