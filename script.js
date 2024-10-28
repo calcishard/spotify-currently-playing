@@ -1,5 +1,5 @@
 const CLIENT_ID = '8af5d68c29394b498a58679e13e1d03b';
-const REDIRECT_URI = 'http://127.0.0.1:5500/index.html'; // Ensure this matches your Spotify app settings
+const REDIRECT_URI = 'https://cheerful-bienenstitch-329df4.netlify.app/'; // Ensure this matches your Spotify app settings
 const SCOPES = 'user-read-currently-playing user-read-recently-played';
 let accessToken;
 let fetchInterval;
@@ -51,7 +51,6 @@ logoutButton.addEventListener('click', () => {
     loginButton.style.display = 'block';
     logoutButton.style.display = 'none';
     songInfo.style.display = 'none';
-    currentlyPlaying.style.display = 'none';
     document.getElementById('song-title').textContent = '';
     document.getElementById('artist-name').textContent = '';
     document.getElementById('album-cover').src = '';
