@@ -45,20 +45,35 @@ if (hash) {
 
 // Logout functionality
 logoutButton.addEventListener('click', () => {
+    // Clear access token in JavaScript
     accessToken = null;
     clearInterval(fetchInterval);
     clearInterval(recentSongsInterval);
+
+    // Clear user interface elements
     loginButton.style.display = 'block';
     logoutButton.style.display = 'none';
     songInfo.style.display = 'none';
+    currentlyPlaying.style.display = 'none';
     document.getElementById('song-title').textContent = '';
     document.getElementById('artist-name').textContent = '';
     document.getElementById('album-cover').src = '';
     recentSongsList.innerHTML = '';
     recentlyPlayed.style.display = 'none';
-    sliderContainer.style.display = 'none'; // Hide slider when logged out
+    sliderContainer.style.display = 'none'; // Hide slider when logged out      
     document.getElementById('lyrics-container').style.display = 'none';
+
+    // Remove access token from URL
+    window.location.hash = '';
+
+    // Open Spotify logout in a new window and redirect back
+    const logoutWindow = window.open('https://accounts.spotify.com/logout', '_blank');
+    setTimeout(() => {
+        logoutWindow.close(); // Close the Spotify logout tab
+        window.location.href = REDIRECT_URI; // Redirect back to the app's main page
+    }, 1000); // Adjust timeout as needed for logout to complete
 });
+
 
 // Fetch currently playing song
 async function fetchCurrentlyPlaying(token) {
