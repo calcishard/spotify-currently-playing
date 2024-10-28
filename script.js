@@ -23,7 +23,7 @@ recentlyPlayed.style.display = 'none';
 
 // Login button click event
 loginButton.addEventListener('click', () => {
-    const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=token`;
+    const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=token`;
     window.location.href = authUrl;
 });
 
