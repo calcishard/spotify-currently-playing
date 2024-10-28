@@ -142,6 +142,7 @@ button:hover {
     display: flex; /* Use flexbox for layout */
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center items horizontally */
+    text-decoration: none;
 }
 
 #song-details {
