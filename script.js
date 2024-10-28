@@ -34,8 +34,8 @@ if (hash) {
     accessToken = token; // Store the access token
     fetchCurrentlyPlaying(token);
     fetchRecentSongs(token);
-    fetchInterval = setInterval(() => fetchCurrentlyPlaying(token), 1000);
-    recentSongsInterval = setInterval(() => fetchRecentSongs(token), 5000);
+    fetchInterval = setInterval(() => fetchCurrentlyPlaying(token), 1000); // Fetch every 1 second
+    recentSongsInterval = setInterval(() => fetchRecentSongs(token), 50000); // Fetch every 5 seconds
     loginButton.style.display = 'none';
     logoutButton.style.display = 'block';
     songInfo.style.display = 'block';
@@ -65,38 +65,38 @@ async function fetchCurrentlyPlaying(token) {
         const response = await fetch('https://api.spotify.com/v1/me/player/currently-playing', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
-        
+
         if (response.ok) {
             const data = await response.json();
             if (data && data.is_playing) {
+                const songTitle = data.item.name;
+                const artistName = data.item.artists[0].name;
+
                 // Set song title as a hyperlink
-                const songTitle = document.getElementById('song-title');
-                songTitle.innerHTML = `<a href="${data.item.external_urls.spotify}" target="_blank" style="color: inherit; text-decoration: none;">${data.item.name}</a>`;
-                
-                // Set artist name as plain text
-                document.getElementById('artist-name').textContent = data.item.artists.map(artist => artist.name).join(', ');
-                
-                // Set album cover image
+                document.getElementById('song-title').innerHTML = `<a href="${data.item.external_urls.spotify}" target="_blank">${songTitle}</a>`;
+                document.getElementById('artist-name').innerHTML = `<span class="artist-name">${data.item.artists.map(artist => artist.name).join(', ')}</span>`;
                 document.getElementById('album-cover').src = data.item.album.images[0].url;
 
+                // Fetch lyrics
+                fetchLyrics(songTitle, artistName);
+
                 // Update slider and time display
-                const duration = data.item.duration_ms; // Total duration in milliseconds
-                const progress = data.progress_ms; // Current playback position in milliseconds
+                const duration = data.item.duration_ms;
+                const progress = data.progress_ms;
                 songSlider.max = duration;
                 songSlider.value = progress;
                 updateTimeDisplays(progress, duration);
-                sliderContainer.style.display = 'flex'; // Show slider when a song is playing
+                sliderContainer.style.display = 'flex';
             } else {
-                document.getElementById('song-title').textContent = 'No song playing';
-                document.getElementById('artist-name').textContent = '';
-                document.getElementById('album-cover').src = '';
-                sliderContainer.style.display = 'none'; // Hide slider if no song is playing
+                resetCurrentlyPlaying();
             }
         } else {
             console.error('Failed to fetch currently playing song:', response.statusText);
+            resetCurrentlyPlaying();
         }
     } catch (error) {
         console.error('Error fetching currently playing song:', error);
+        resetCurrentlyPlaying();
     }
 }
 
@@ -129,6 +129,23 @@ async function fetchRecentSongs(token) {
     }
 }
 
+// Fetch lyrics for the currently playing song
+async function fetchLyrics(songTitle, artistName) {
+    try {
+        const response = await fetch(`https://api.lyrics.ovh/v1/${artistName}/${songTitle}`);
+        if (response.ok) {
+            const data = await response.json();
+            document.getElementById('lyrics').textContent = data.lyrics || 'Lyrics not found.';
+        } else {
+            console.error('Failed to fetch lyrics:', response.statusText);
+            document.getElementById('lyrics').textContent = 'Lyrics not found.';
+        }
+    } catch (error) {
+        console.error('Error fetching lyrics:', error);
+        document.getElementById('lyrics').textContent = 'Lyrics not available.';
+    }
+}
+
 // Update time displays
 function updateTimeDisplays(currentTime, totalTime) {
     currentTimeDisplay.textContent = formatTime(currentTime);
@@ -140,4 +157,13 @@ function formatTime(milliseconds) {
     const minutes = Math.floor((milliseconds / 1000) / 60);
     const seconds = Math.floor((milliseconds / 1000) % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+}
+
+// Reset currently playing state
+function resetCurrentlyPlaying() {
+    document.getElementById('song-title').textContent = 'No song playing';
+    document.getElementById('artist-name').textContent = '';
+    document.getElementById('album-cover').src = '';
+    document.getElementById('lyrics').textContent = 'Lyrics not available.';
+    sliderContainer.style.display = 'none';
 }

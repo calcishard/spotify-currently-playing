@@ -3,6 +3,14 @@
     box-sizing: border-box; /* Ensure padding and border are included in width/height */
 }
 
+/* Main Container Flexbox Setup */
+#main-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    height: 100vh; /* Full height of the viewport */
+}
+
 /* Recently Played List */
 #recent-songs-list {
     list-style-type: none; /* Remove default list styles */
@@ -36,6 +44,7 @@
     color: #b3b3b3; /* Slightly lighter color for artist */
 }
 
+/* Body and App Container Styling */
 body {
     font-family: Arial, sans-serif;
     background-color: #121212; /* Dark background */
@@ -70,7 +79,25 @@ body {
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center horizontally */
     justify-content: center; /* Center vertically */
+    background-color: #121212; /* Match the body background color */
+}
+
+/* Lyrics Container */
+#lyrics-container {
+    width: 300px; /* Fixed width for lyrics section */
+    padding: 10px;
     background-color: #1e1e1e; /* Darker background for contrast */
+    border-left: 1px solid #333; /* Separator line */
+    overflow-y: auto; /* Allow scrolling if lyrics overflow */
+    scrollbar-width: none; /* For Firefox */
+    color: #ffffff; /* White text color */
+}
+
+/* Lyrics Text Styling */
+#lyrics {
+    white-space: pre-wrap; /* Preserve line breaks in lyrics */
+    line-height: 1.5em; /* Adjust line height for spacing */
+    margin-top: 10px; /* Add a top margin */
 }
 
 /* Button Styles */
@@ -119,7 +146,10 @@ button:hover {
 
 #song-details {
     display: flex; /* Use flexbox for song details */
-    align-items: center; /* Center vertically */
+    flex-direction: column; /* Stack title and artist vertically */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text */
+    margin-top: 10px; /* Space above the details */
 }
 
 /* Updated Song Title and Artist Name Styles */
@@ -129,10 +159,10 @@ button:hover {
     margin: 0; /* Remove default margin */
     color: #ffffff; /* Set desired text color for links */
     text-decoration: none; /* Remove underline from links */
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide overflow text */
-    text-overflow: ellipsis; /* Add ellipsis for overflow text */
-    max-width: 200px; /* Set a maximum width */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
 #song-info #artist-name {
@@ -140,18 +170,10 @@ button:hover {
     font-weight: normal; /* Normal font weight for artist */
     color: #b3b3b3; /* Lighter color for artist name */
     margin: 0; /* Remove default margin */
-    white-space: nowrap; /* Prevent text from wrapping */
-    overflow: hidden; /* Hide overflow text */
-    text-overflow: ellipsis; /* Add ellipsis for overflow text */
-    max-width: 200px; /* Set a maximum width */
-}
-
-/* Album Cover */
-#album-cover {
-    width: 100px; /* Fixed width for the album cover */
-    height: 100px; /* Fixed height for the album cover */
-    object-fit: cover; /* Ensure the image covers the area */
-    margin-right: 15px; /* Space between the image and text */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
 }
 
 /* Style for hyperlinks in song titles */
@@ -171,5 +193,4 @@ button:hover {
 #recent-songs-list {
     color: #ffffff; /* Set desired text color */
 }
-
 
