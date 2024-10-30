@@ -84,6 +84,8 @@ body {
 
 /* Lyrics Container */
 #lyrics-container {
+    display: flex;
+    flex-direction: row;
     width: 300px; /* Fixed width for lyrics section */
     padding: 10px;
     background-color: #1e1e1e; /* Darker background for contrast */
@@ -214,14 +216,37 @@ button:hover {
     text-decoration: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 878px) {
+
+    body {
+        overflow-x: hidden;
+    }
+
+    #app {
+        flex-direction: column; /* Stack children vertically on mobile */
+    }
+
+    #current-info {
+        order: 1; /* Ensure current info comes first */
+        width: 100%; /* Full width */
+        height: 70vh !important;
+    }
+
     #lyrics-container {
+        order: 2; /* Ensure lyrics container comes second */
+        display: flex; /* Make sure it shows */
+        flex-direction: column; /* Stack items vertically */
+        width: 100%; /* Full width */
+        margin-top: 20px; /* Space above lyrics */
+    }
+
+    #recently-played {
+        display: none !important; /* This will hide the div and it won't take up any space */
+    }  
+    
+    #logout {
         display: none !important;
     }
 }
 
-@media only screen and (max-width: 486px) {
-    #recently-played {
-        display: none !important;
-    }
-}
+
