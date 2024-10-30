@@ -23,7 +23,7 @@ recentlyPlayed.style.display = 'none';
 
 // Login button click event
 loginButton.addEventListener('click', () => {
-    const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&scope=${SCOPES}&response_type=token`;
+    const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=token`;
     window.location.href = authUrl;
 });
 
@@ -34,19 +34,23 @@ if (hash) {
     accessToken = token; // Store the access token
     fetchCurrentlyPlaying(token);
     fetchRecentSongs(token);
-    fetchInterval = setInterval(() => fetchCurrentlyPlaying(token), 1000); // Fetch every 1 second
-    recentSongsInterval = setInterval(() => fetchRecentSongs(token), 50000); // Fetch every 5 seconds
+    fetchInterval = setInterval(() => fetchCurrentlyPlaying(token), 1000);
+    recentSongsInterval = setInterval(() => fetchRecentSongs(token), 1000);
     loginButton.style.display = 'none';
     logoutButton.style.display = 'block';
     songInfo.style.display = 'block';
     recentlyPlayed.style.display = 'block';
+    document.getElementById('lyrics-container').style.display = 'block';
 }
 
 // Logout functionality
 logoutButton.addEventListener('click', () => {
+    // Clear access token in JavaScript
     accessToken = null;
     clearInterval(fetchInterval);
     clearInterval(recentSongsInterval);
+
+    // Clear user interface elements
     loginButton.style.display = 'block';
     logoutButton.style.display = 'none';
     songInfo.style.display = 'none';
@@ -56,8 +60,20 @@ logoutButton.addEventListener('click', () => {
     document.getElementById('album-cover').src = '';
     recentSongsList.innerHTML = '';
     recentlyPlayed.style.display = 'none';
-    sliderContainer.style.display = 'none'; // Hide slider when logged out
+    sliderContainer.style.display = 'none'; // Hide slider when logged out      
+    document.getElementById('lyrics-container').style.display = 'none';
+
+    // Remove access token from URL
+    window.location.hash = '';
+
+    // Open Spotify logout in a new window and redirect back
+    const logoutWindow = window.open('https://accounts.spotify.com/logout', '_blank');
+    setTimeout(() => {
+        logoutWindow.close(); // Close the Spotify logout tab
+        window.location.href = REDIRECT_URI; // Redirect back to the app's main page
+    }, 1000); // Adjust timeout as needed for logout to complete
 });
+
 
 // Fetch currently playing song
 async function fetchCurrentlyPlaying(token) {
@@ -88,15 +104,17 @@ async function fetchCurrentlyPlaying(token) {
                 updateTimeDisplays(progress, duration);
                 sliderContainer.style.display = 'flex';
             } else {
-                resetCurrentlyPlaying();
+                document.getElementById('song-title').textContent = 'No song playing';
+                document.getElementById('artist-name').textContent = '';
+                document.getElementById('album-cover').src = '';
+                document.getElementById('lyrics').textContent = 'Lyrics not available.';
+                sliderContainer.style.display = 'none';
             }
         } else {
             console.error('Failed to fetch currently playing song:', response.statusText);
-            resetCurrentlyPlaying();
         }
     } catch (error) {
         console.error('Error fetching currently playing song:', error);
-        resetCurrentlyPlaying();
     }
 }
 
@@ -157,13 +175,4 @@ function formatTime(milliseconds) {
     const minutes = Math.floor((milliseconds / 1000) / 60);
     const seconds = Math.floor((milliseconds / 1000) % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
-}
-
-// Reset currently playing state
-function resetCurrentlyPlaying() {
-    document.getElementById('song-title').textContent = 'No song playing';
-    document.getElementById('artist-name').textContent = '';
-    document.getElementById('album-cover').src = '';
-    document.getElementById('lyrics').textContent = 'Lyrics not available.';
-    sliderContainer.style.display = 'none';
 }

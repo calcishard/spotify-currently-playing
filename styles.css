@@ -141,16 +141,15 @@ button:hover {
 #song-info {
     display: flex; /* Use flexbox for layout */
     flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center items horizontally */
-    text-decoration: none;
+    align-items: left; /* Center items horizontally */
 }
 
 #song-details {
     display: flex; /* Use flexbox for song details */
     flex-direction: column; /* Stack title and artist vertically */
-    align-items: center; /* Center items horizontally */
-    text-align: center; /* Center text */
-    margin-top: 10px; /* Space above the details */
+    align-items: left; /* Center items horizontally */
+    text-align: left; /* Center text */
+    margin-top: 0px; /* Space above the details */
 }
 
 /* Updated Song Title and Artist Name Styles */
@@ -195,3 +194,34 @@ button:hover {
     color: #ffffff; /* Set desired text color */
 }
 
+#song-title a:link {
+    color: #ffffff;
+    text-decoration: none;
+}   
+
+#song-title a:visited {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#song-title a:hover {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#song-title a:active {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+@media only screen and (max-width: 768px) {
+    #lyrics-container {
+        display: none !important;
+    }
+}
+
+@media only screen and (max-width: 486px) {
+    #recently-played {
+        display: none !important;
+    }
+}
