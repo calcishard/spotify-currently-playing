@@ -16,11 +16,16 @@ const currentTimeDisplay = document.getElementById('current-time');
 const totalTimeDisplay = document.getElementById('total-time');
 const songSlider = document.getElementById('song-slider');
 const mobileLogoutButton = document.getElementById('mobile-logout');
+const lyricsTab = document.getElementById('lyrics-tab');
 
 // Initially hide elements
 logoutButton.style.display = 'none';
 songInfo.style.display = 'none';
 recentlyPlayed.style.display = 'none';
+
+function isMobileView() {
+    return window.innerWidth <= 878; // Mobile breakpoint at 878px
+}
 
 // Login button click event
 loginButton.addEventListener('click', () => {
@@ -42,6 +47,11 @@ if (hash) {
     songInfo.style.display = 'block';
     recentlyPlayed.style.display = 'block';
     document.getElementById('lyrics-container').style.display = 'block';
+    lyricsTab.style.display = 'block';
+    mobileLogoutButton.style.display = 'block';
+    if (isMobileView()) {
+        document.getElementById('app').style.height = '150vh';
+    }
 }
 
 // Logout functionality
@@ -63,6 +73,11 @@ logoutButton.addEventListener('click', () => {
     recentlyPlayed.style.display = 'none';
     sliderContainer.style.display = 'none'; // Hide slider when logged out      
     document.getElementById('lyrics-container').style.display = 'none';
+    lyricsTab.style.display = 'none';
+    mobileLogoutButton.style.display = 'none';
+    if (isMobileView()) {
+        document.getElementById('app').style.height = '100vh';
+    }
 
     // Remove access token from URL
     window.location.hash = '';
@@ -185,9 +200,15 @@ async function fetchLyrics(songTitle, artistName) {
         if (response.ok) {
             const data = await response.json();
             document.getElementById('lyrics').textContent = data.lyrics || 'Lyrics not found.';
+            if (isMobileView()) {
+                document.getElementById('app').style.height = '150vh';
+            }
         } else {
             console.error('Failed to fetch lyrics:', response.statusText);
             document.getElementById('lyrics').textContent = 'Lyrics not found.';
+            if (isMobileView()) {
+                document.getElementById('app').style.height = '110vh';
+            }
         }
     } catch (error) {
         console.error('Error fetching lyrics:', error);

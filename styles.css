@@ -217,11 +217,11 @@ button:hover {
 }
 
 #lyrics-tab {
-    display: none !important;
+    display: none;
 }
 
 #mobile-logout {
-    display: none !important;
+    display: none;
 }
 
 @media only screen and (max-width: 878px) {
@@ -232,7 +232,7 @@ button:hover {
     }
 
     #app {
-        height: 150vh;
+        height: 100vh;
         flex-direction: column; 
         overflow-y: scroll !important;
         max-width: 100%;
@@ -255,7 +255,7 @@ button:hover {
     /* Lyrics Tab Styling */
     #lyrics-tab {
         order: 2;
-        display: block !important;
+        display: none;
         position: absolute; /* Changed to fixed to stay at the bottom of the viewport */
         bottom: 0; /* Keeps it at the bottom */
         left: 50%; /* Positioning it 50% from the left */
@@ -278,10 +278,6 @@ button:hover {
 
     #lyrics-tab:hover {
         background-color: #333;
-    }
-
-    #mobile-logout {
-        display: block !important;
     }
 
     #lyrics-container {
