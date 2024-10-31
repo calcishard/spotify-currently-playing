@@ -30,9 +30,8 @@ function isMobileView() {
 // Login button click event
 const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=token`;
 loginButton.addEventListener('click', () => {
-    const loginWindow = window.location.href = authUrl;
+    window.location.href = authUrl;
     if (hash) {
-        console.log("hello");
         loginWindow.close();
         window.location.href = authUrl;
     }
@@ -60,11 +59,16 @@ if (hash.includes("access_token")) {
     recentlyPlayed.style.display = 'block';
     document.getElementById('lyrics-container').style.display = 'block';
     currentlyPlaying.textContent = "Currently Playing";
+    document.getElementById('welcome-container').style.display = 'none';
+
 
     if (isMobileView()) {
         document.getElementById('app').style.height = '150vh';
         lyricsTab.style.display = 'block';
         mobileLogoutButton.style.display = 'block';
+        document.getElementById('current-info').style.width = '100%';
+        document.getElementById('current-info').style.height = '100%';
+        document.getElementById('welcome-container').style.display = 'none';
     }
 }
 
@@ -89,7 +93,7 @@ logoutButton.addEventListener('click', () => {
     document.getElementById('lyrics-container').style.display = 'none';
     lyricsTab.style.display = 'none';
     mobileLogoutButton.style.display = 'none';
-    currentlyPlaying.textContent = "Spotistats";
+    currentlyPlaying.textContent = "SpotiStats";
     if (isMobileView()) {
         document.getElementById('app').style.height = '100vh';
     }

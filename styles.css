@@ -241,13 +241,12 @@ button:hover {
     #current-info {
         display: flex;
         order: 1; 
-        width: 100%; 
-        height: 100% !important;
+        width: 0%; 
+        height: 0%;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        position: absolute;
-            
+        position: absolute;  
         margin-bottom: 50%;
         max-width: 100%;
     }
@@ -310,6 +309,84 @@ button:hover {
         font-size: 16px;
         transition: background-color 0.3s;
     }
+}
+
+/* Centering Wrapper */
+.center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Full viewport height */
+    width: 100vw; /* Full viewport width */
+}
+
+
+/* Main Container */
+#welcome-container {
+    position: absolute !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto; /* Center horizontally and vertically */
+    width: 90%; /* Set a width for the container */
+    max-width: 600px; /* Optional: max width */
+    height: 80%; /* Set a height for the container */
+    max-height: 600px; /* Optional: max height */
+    font-family: Arial, sans-serif;
+    background-color: #121212; /* Dark background */
+    color: #ffffff; /* White text */
+    overflow-y: hidden !important; /* Prevent scrolling */
+    text-align: center;
+    border-radius: 10%;
+}
+
+
+/* Welcome Text */
+#welcome-text {
+    font-size: 2.5em;
+    color: #1db954; /* Spotify green */
+    margin-bottom: 10px;
+}
+
+#p1 {
+    font-size: 1.2em;
+    color: #b3b3b3; /* Lighter gray text */
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Button Styling */
+.login-btn {
+    background-color: #1db954; /* Spotify green */
+    color: #ffffff; /* White text */
+    padding: 15px 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #1aa34a; /* Darker green */
+}
+
+/* Footer Text */
+footer {
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: #7d7d7d;
+}
+
+footer a {
+    color: #1db954;
+    text-decoration: none;
+}
+
+footer a:hover {
+    text-decoration: underline;
 }
 
 
