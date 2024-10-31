@@ -1,5 +1,5 @@
 const CLIENT_ID = '8af5d68c29394b498a58679e13e1d03b';
-const REDIRECT_URI = 'https://cheerful-bienenstitch-329df4.netlify.app/'; // Ensure this matches your Spotify app settings
+const REDIRECT_URI = 'http://127.0.0.1:5500/index.html'; // Ensure this matches your Spotify app settings
 const SCOPES = 'user-read-currently-playing user-read-recently-played';
 let accessToken;
 let fetchInterval;
@@ -15,6 +15,7 @@ const sliderContainer = document.getElementById('slider-container');
 const currentTimeDisplay = document.getElementById('current-time');
 const totalTimeDisplay = document.getElementById('total-time');
 const songSlider = document.getElementById('song-slider');
+const mobileLogoutButton = document.getElementById('mobile-logout');
 
 // Initially hide elements
 logoutButton.style.display = 'none';
@@ -45,6 +46,36 @@ if (hash) {
 
 // Logout functionality
 logoutButton.addEventListener('click', () => {
+    // Clear access token in JavaScript
+    accessToken = null;
+    clearInterval(fetchInterval);
+    clearInterval(recentSongsInterval);
+
+    // Clear user interface elements
+    loginButton.style.display = 'block';
+    logoutButton.style.display = 'none';
+    songInfo.style.display = 'none';
+    currentlyPlaying.style.display = 'none';
+    document.getElementById('song-title').textContent = '';
+    document.getElementById('artist-name').textContent = '';
+    document.getElementById('album-cover').src = '';
+    recentSongsList.innerHTML = '';
+    recentlyPlayed.style.display = 'none';
+    sliderContainer.style.display = 'none'; // Hide slider when logged out      
+    document.getElementById('lyrics-container').style.display = 'none';
+
+    // Remove access token from URL
+    window.location.hash = '';
+
+    // Open Spotify logout in a new window and redirect back
+    const logoutWindow = window.open('https://accounts.spotify.com/logout', '_blank');
+    setTimeout(() => {
+        logoutWindow.close(); // Close the Spotify logout tab
+        window.location.href = REDIRECT_URI; // Redirect back to the app's main page
+    }, 1000); // Adjust timeout as needed for logout to complete
+});
+
+mobileLogoutButton.addEventListener('click', () => {
     // Clear access token in JavaScript
     accessToken = null;
     clearInterval(fetchInterval);
@@ -176,3 +207,7 @@ function formatTime(milliseconds) {
     const seconds = Math.floor((milliseconds / 1000) % 60);
     return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
 }
+
+document.getElementById("lyrics-tab").addEventListener("click", function() {
+    document.getElementById("lyrics-container").scrollIntoView({ behavior: "smooth" });
+});

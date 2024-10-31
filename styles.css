@@ -216,37 +216,105 @@ button:hover {
     text-decoration: none;
 }
 
+#lyrics-tab {
+    display: none !important;
+}
+
+#mobile-logout {
+    display: none !important;
+}
+
 @media only screen and (max-width: 878px) {
 
     body {
-        overflow-x: hidden;
+        overflow-x: hidden !important;
+        width: 100vw;
     }
 
     #app {
-        flex-direction: column; /* Stack children vertically on mobile */
+        height: 150vh;
+        flex-direction: column; 
+        overflow-y: scroll !important;
+        max-width: 100%;
     }
 
     #current-info {
-        order: 1; /* Ensure current info comes first */
-        width: 100%; /* Full width */
-        height: 70vh !important;
+        display: flex;
+        order: 1; 
+        width: 100%; 
+        height: 100% !important;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+            
+        margin-bottom: 50%;
+        max-width: 100%;
+    }
+
+    /* Lyrics Tab Styling */
+    #lyrics-tab {
+        order: 2;
+        display: block !important;
+        position: absolute; /* Changed to fixed to stay at the bottom of the viewport */
+        bottom: 0; /* Keeps it at the bottom */
+        left: 50%; /* Positioning it 50% from the left */
+        transform: translateX(-50%); /* Move it back by 50% of its width for centering */
+        width: 90%;
+        max-width: 100%;
+        text-align: center;
+        background-color: #1e1e1e;
+        color: #ffffff;
+        font-weight: bold;
+        padding: 10px;
+        cursor: pointer;
+        z-index: 10;
+        overflow-x: hidden !important;
+    }
+    
+    #desktop-lyrics-tab {
+        display: none !important;
+    }
+
+    #lyrics-tab:hover {
+        background-color: #333;
+    }
+
+    #mobile-logout {
+        display: block !important;
     }
 
     #lyrics-container {
-        order: 2; /* Ensure lyrics container comes second */
-        display: flex; /* Make sure it shows */
-        flex-direction: column; /* Stack items vertically */
-        width: 100%; /* Full width */
-        margin-top: 20px; /* Space above lyrics */
-    }
+        order: 3; 
+        width: 100%;
+        padding: 20px;
+        background-color: #1e1e1e;
+        color: #ffffff;
+        overflow-y: scroll;
+        overflow-x: hidden !important;
+        box-sizing: border-box;
+        max-width: 100%;
+        margin-top: 100vh; /* Adjust this value to bring it down */
+    }    
 
     #recently-played {
-        display: none !important; /* This will hide the div and it won't take up any space */
-    }  
-    
-    #logout {
         display: none !important;
     }
+
+    #mobile-logout {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: #1db954;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
 }
+
 
 

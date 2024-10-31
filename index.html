@@ -12,9 +12,10 @@
             <h2>Recently Played</h2>
             <ul id="recent-songs-list"></ul> <!-- List for recently played songs -->
         </div>
+        <button id="logout">Logout</button> <!-- Logout button -->
         <div id="current-info">
+            <button id="mobile-logout" style="display: none;">Logout</button>
             <h1 id="currently-playing">Currently Playing</h1>
-            <button id="logout">Logout</button> <!-- Logout button -->
             <div id="song-info">
                 <img id="album-cover" src="" alt="Album Cover" style="width: 200px; height: 200px; margin-bottom: 10px;">
                 <div id="song-details">
@@ -33,8 +34,9 @@
                 </div>
             </div>
         </div>
+        <h2 id="lyrics-tab" styles="display: none">Lyrics</h2>
         <div id="lyrics-container" style="display: none;">
-            <h2>Lyrics</h2>
+            <h2 id="desktop-lyrics-tab">Lyrics</h2>
             <div id="lyrics">No lyrics available</div>
         </div>
     </div>    
