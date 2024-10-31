@@ -28,8 +28,8 @@ function isMobileView() {
 }
 
 // Login button click event
+const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=token`;
 loginButton.addEventListener('click', () => {
-    const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=token`;
     window.location.href = authUrl;
 });
 
@@ -49,7 +49,6 @@ if (hash) {
     document.getElementById('lyrics-container').style.display = 'block';
     currentlyPlaying.textContent = "Currently Playing";
     if (isMobileView()) {
-        window.location.href = REDIRECT_URI;
         document.getElementById('app').style.height = '150vh';
         lyricsTab.style.display = 'block';
         mobileLogoutButton.style.display = 'block';
