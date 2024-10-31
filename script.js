@@ -47,6 +47,7 @@ if (hash) {
     songInfo.style.display = 'block';
     recentlyPlayed.style.display = 'block';
     document.getElementById('lyrics-container').style.display = 'block';
+    currentlyPlaying.textContent = "Currently Playing";
     if (isMobileView()) {
         document.getElementById('app').style.height = '150vh';
         lyricsTab.style.display = 'block';
@@ -75,6 +76,7 @@ logoutButton.addEventListener('click', () => {
     document.getElementById('lyrics-container').style.display = 'none';
     lyricsTab.style.display = 'none';
     mobileLogoutButton.style.display = 'none';
+    currentlyPlaying.textContent = "Spotistats";
     if (isMobileView()) {
         document.getElementById('app').style.height = '100vh';
     }
