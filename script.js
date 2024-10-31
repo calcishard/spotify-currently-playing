@@ -58,7 +58,7 @@ if (hash.includes("access_token")) {
     songInfo.style.display = 'block';
     recentlyPlayed.style.display = 'block';
     document.getElementById('lyrics-container').style.display = 'block';
-    currentlyPlaying.textContent = "Currently Playing";
+    currentlyPlaying.style.display = 'block';
     document.getElementById('welcome-container').style.display = 'none';
 
 
@@ -93,7 +93,7 @@ logoutButton.addEventListener('click', () => {
     document.getElementById('lyrics-container').style.display = 'none';
     lyricsTab.style.display = 'none';
     mobileLogoutButton.style.display = 'none';
-    currentlyPlaying.textContent = "SpotiStats";
+    currentlyPlaying.style.display = 'none';
     if (isMobileView()) {
         document.getElementById('app').style.height = '100vh';
     }
