@@ -30,13 +30,17 @@ function isMobileView() {
 // Login button click event
 const authUrl = `https://accounts.spotify.com/authorize?client_id=${CLIENT_ID}&redirect_uri=${encodeURIComponent(REDIRECT_URI)}&scope=${SCOPES}&response_type=token`;
 loginButton.addEventListener('click', () => {
-    window.location.href = authUrl;
+    const loginWindow = window.location.href = authUrl;
+    if (hash) {
+        console.log("hello");
+        loginWindow.close();
+        window.location.href = authUrl;
+    }
 });
 
 // Handle the redirect and extract the access token
 const hash = window.location.hash;
 if (hash.includes("access_token")) {
-    window.location.href = REDIRECT_URI;
     const params = new URLSearchParams(hash.substring(1));
     accessToken = params.get('access_token'); // Store the access token
 
