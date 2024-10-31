@@ -35,19 +35,27 @@ loginButton.addEventListener('click', () => {
 
 // Handle the redirect and extract the access token
 const hash = window.location.hash;
-if (hash) {
-    const token = hash.split('&')[0].split('=')[1];
-    accessToken = token; // Store the access token
-    fetchCurrentlyPlaying(token);
-    fetchRecentSongs(token);
-    fetchInterval = setInterval(() => fetchCurrentlyPlaying(token), 1000);
-    recentSongsInterval = setInterval(() => fetchRecentSongs(token), 1000);
+if (hash.includes("access_token")) {
+    const params = new URLSearchParams(hash.substring(1));
+    accessToken = params.get('access_token'); // Store the access token
+
+    // Clean up the URL by removing the hash
+    window.history.replaceState({}, document.title, REDIRECT_URI);
+
+    // Proceed with fetching data
+    fetchCurrentlyPlaying(accessToken);
+    fetchRecentSongs(accessToken);
+    fetchInterval = setInterval(() => fetchCurrentlyPlaying(accessToken), 1000);
+    recentSongsInterval = setInterval(() => fetchRecentSongs(accessToken), 1000);
+
+    // Update UI
     loginButton.style.display = 'none';
     logoutButton.style.display = 'block';
     songInfo.style.display = 'block';
     recentlyPlayed.style.display = 'block';
     document.getElementById('lyrics-container').style.display = 'block';
     currentlyPlaying.textContent = "Currently Playing";
+
     if (isMobileView()) {
         document.getElementById('app').style.height = '150vh';
         lyricsTab.style.display = 'block';
