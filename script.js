@@ -47,10 +47,10 @@ if (hash) {
     songInfo.style.display = 'block';
     recentlyPlayed.style.display = 'block';
     document.getElementById('lyrics-container').style.display = 'block';
-    lyricsTab.style.display = 'block';
-    mobileLogoutButton.style.display = 'block';
     if (isMobileView()) {
         document.getElementById('app').style.height = '150vh';
+        lyricsTab.style.display = 'block';
+        mobileLogoutButton.style.display = 'block';
     }
 }
 
