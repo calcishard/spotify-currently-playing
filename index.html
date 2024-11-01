@@ -6,6 +6,7 @@
     <title>SpotiStats - Track your Spotify stats</title>
     <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
     <link rel="icon" type="image/png" href="Eo_circle_green_letter-s.svg.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
 <body>
     <div id="app">
@@ -35,10 +36,21 @@
                     <p id="artist-name">Artist Name</p>
                 </div>
             </div>
+            <div class="controls">
+                <button id="prev-button" class="spotify-button" style="display: none;">
+                    <span class="material-symbols-outlined">skip_previous</span>
+                </button>
+                <button id="play-pause-button" class="spotify-button" style="display: none;">
+                    <span class="material-symbols-outlined" id="play-pause-icon">play_arrow</span>
+                </button>
+                <button id="next-button" class="spotify-button" style="display: none;">
+                    <span class="material-symbols-outlined">skip_next</span>
+                </button>
+            </div>            
             <div id="slider-container" style="display: none;"> <!-- Initially hidden -->
                 <div id="time-container">
                     <span id="current-time">0:00</span>
-                    <input type="range" id="song-slider" min="0" value="0" disabled /> <!-- Disabled slider -->
+                    <input type="range" id="song-slider" min="0" value="0"/> <!-- Disabled slider -->
                     <span id="total-time">0:00</span>
                 </div>
             </div>
@@ -48,7 +60,8 @@
             <h2 id="desktop-lyrics-tab">Lyrics</h2>
             <div id="lyrics">No lyrics available</div>
         </div>
-    </div>    
+    </div>  
+    <script src="https://sdk.scdn.co/spotify-player.js"></script>  
     <script src="script.js"></script>
 </body>
 </html>

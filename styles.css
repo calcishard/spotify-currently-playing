@@ -124,19 +124,63 @@ button:hover {
     background-color: #1aa34a; /* Darker green on hover */
 }
 
-/* Slider Styles */
-#slider-container {
+#controls {
     display: flex; /* Use flexbox for layout */
     align-items: center; /* Center items vertically */
     margin-top: 20px; /* Space above the slider */
 }
 
-/* Time Display */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px; /* Space between buttons */
+    margin-top:20px;
+}
+
+.spotify-button {
+    background-color: transparent; /* Make the background transparent */
+    border: none; /* Remove the border */
+    border-radius: 50%; /* Round buttons */
+    padding: 10px; /* Add padding for clickable area */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transition for background and transform */
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spotify-button:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Light transparent background on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+.material-symbols-outlined {
+    font-size: 24px; /* Adjust icon size */
+    color: white; /* White icons */
+}
+  
+
+/* Slider Styles */
+#slider-container {
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Center items vertically */
+    margin-top: 5px; /* Space above the slider */
+}
+
 #time-container {
-    display: flex; /* Use flexbox to arrange time displays */
-    justify-content: space-between; /* Space them out */
-    width: 100%; /* Full width for alignment */
-    padding: 0 20px; /* Side padding */
+    display: flex; /* Use Flexbox for alignment */
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space out the items */
+    width: 100%; /* Full width for the container */
+    margin: 10px 0; /* Optional: add some vertical margin */
+}
+
+#current-time, #total-time {
+    width: 50px; /* Set a fixed width for the time displays */
+    text-align: center; /* Center the text */
 }
 
 /* Song Info Styles */
@@ -388,6 +432,76 @@ footer a {
 footer a:hover {
     text-decoration: underline;
 }
+
+/* Style the slider track */
+input[type="range"] {
+    -webkit-appearance: none; /* Remove default styling for WebKit browsers */
+    width: 100%; /* Full width */
+    height: 5px; /* Track height */
+    background: linear-gradient(to right, #ffffff 0%, #ffffff var(--played-percentage), #b0b0b0 var(--played-percentage), #b0b0b0 100%); /* Gradient for played/unplayed */
+    border-radius: 5px; /* Rounded corners */
+    outline: none; /* Remove outline */
+}
+
+/* Change played portion to green on hover */
+input[type="range"]:hover {
+    background: linear-gradient(to right, #4caf50 0%, #4caf50 var(--played-percentage), #b0b0b0 var(--played-percentage), #b0b0b0 100%); /* Green for played portion on hover */
+}
+
+/* Style the slider thumb */
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none; /* Remove default styling */
+    width: 15px; /* Thumb width */
+    height: 15px; /* Thumb height */
+    border-radius: 50%; /* Make the thumb circular */
+    background: #ffffff; /* Change thumb color to white */
+    border: 2px solid #ccc; /* Optional: add a border to the thumb */
+    cursor: pointer; /* Change cursor on hover */
+    opacity: 0; /* Initially hide the thumb */
+    transition: opacity 0.2s; /* Transition for smooth appearance */
+}
+
+/* Show the thumb when hovering over the slider */
+input[type="range"]:hover::-webkit-slider-thumb {
+    opacity: 1; /* Show the thumb on hover */
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px; /* Thumb width */
+    height: 20px; /* Thumb height */
+    border-radius: 50%; /* Make the thumb circular */
+    background: #ffffff; /* Change thumb color to white */
+    border: 2px solid #ccc; /* Optional: add a border to the thumb */
+    cursor: pointer; /* Change cursor on hover */
+    opacity: 0; /* Initially hide the thumb */
+    transition: opacity 0.2s; /* Transition for smooth appearance */
+}
+
+/* Show the thumb when hovering over the slider */
+input[type="range"]:hover::-moz-range-thumb {
+    opacity: 1; /* Show the thumb on hover */
+}
+
+/* Optional: Add a hover effect */
+input[type="range"]::-webkit-slider-thumb:hover {
+    background: #f0f0f0; /* Slightly darker shade on hover */
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+    background: #f0f0f0; /* Slightly darker shade on hover */
+}
+
+/* Optional: Style the slider track while sliding */
+input[type="range"]:active::-webkit-slider-thumb {
+    background: #e0e0e0; /* Even darker shade while sliding */
+}
+
+input[type="range"]:active::-moz-range-thumb {
+    background: #e0e0e0; /* Even darker shade while sliding */
+}
+
+
 
 
 
