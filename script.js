@@ -1,5 +1,7 @@
 const CLIENT_ID = '8af5d68c29394b498a58679e13e1d03b';
-const REDIRECT_URI = 'https://spotistats.dev/'; // Ensure this matches your Spotify app settings
+const REDIRECT_URI = 'https://spotistats.dev/';
+//http://127.0.0.1:5500/index.html
+//https://spotistats.dev/
 const SCOPES = 'user-read-currently-playing user-read-recently-played user-modify-playback-state';
 let accessToken;
 let fetchInterval;
@@ -57,7 +59,6 @@ if (hash.includes("access_token")) {
     fetchInterval = setInterval(() => fetchCurrentlyPlaying(accessToken), 1000);
     recentSongsInterval = setInterval(() => fetchRecentSongs(accessToken), 1000);
     isSongPlaying = setInterval(() => checkIfSongIsPlaying(accessToken), 1000);
-    sliderDisplay = setInterval(() => updateSongProgress(currentTime, duration), 1000);
 
     // Update UI
     loginButton.style.display = 'none';
@@ -85,15 +86,6 @@ function updateSlider(playedPercentage) {
     const slider = document.getElementById("song-slider");
     // Update the CSS variable for played percentage
     slider.style.setProperty('--played-percentage', playedPercentage + '%');
-}
-
-// Example of how to call this function when you receive new song data
-// Assuming you get the current time and duration of the song in seconds
-function updateSongProgress(currentTime, duration) {
-    if (duration > 0) {
-        const playedPercentage = (currentTime / duration) * 100; // Calculate percentage
-        updateSlider(playedPercentage); // Update slider
-    }
 }
 
 // Logout functionality
@@ -193,6 +185,15 @@ async function fetchCurrentlyPlaying(token) {
     }
 }
 
+// Example of how to call this function when you receive new song data
+// Assuming you get the current time and duration of the song in seconds
+function updateSongProgress(currentTime, duration) {
+    if (duration > 0) {
+        const playedPercentage = (currentTime / duration) * 100; // Calculate percentage
+        updateSlider(playedPercentage); // Update slider
+    }
+}
+
 function handleNoCurrentSong() {
     const storedSong = localStorage.getItem('currentlyPlaying');
     if (storedSong) {
@@ -218,11 +219,9 @@ async function checkIfSongIsPlaying(token) {
         if (response.ok) {
             const data = await response.json();
             if (data && data.is_playing) {
-                console.log('A song is currently playing:', data.item.name);
                 // Update the play/pause button to show "pause"
                 playPauseIcon.textContent = 'pause'; // Change icon to pause
             } else {
-                console.log('No song is currently playing.');
                 // Update the play/pause button to show "play"
                 playPauseIcon.textContent = 'play_arrow'; // Change icon to play
             }
