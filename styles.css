@@ -367,6 +367,9 @@ button:hover {
 
 /* Main Container */
 #welcome-container {
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
     position: absolute !important;
     top: 0;
     left: 0;
@@ -383,8 +386,8 @@ button:hover {
     overflow-y: hidden !important; /* Prevent scrolling */
     text-align: center;
     border-radius: 10%;
+    flex-direction: column; /* Optional: stack text vertically */
 }
-
 
 /* Welcome Text */
 #welcome-text {
