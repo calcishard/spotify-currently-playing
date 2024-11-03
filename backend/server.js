@@ -1,7 +1,5 @@
 // Load environment variables
 require("dotenv").config();
-console.log("Spotify Client ID:", process.env.SPOTIFY_CLIENT_ID);
-console.log("Spotify Client Secret:", process.env.SPOTIFY_CLIENT_SECRET);
 
 const express = require("express");
 const mongoose = require("mongoose");

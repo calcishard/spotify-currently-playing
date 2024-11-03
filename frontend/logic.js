@@ -1,5 +1,5 @@
 // API URL for backend routes
-const API_URL = "http://localhost:3000";
+const API_URL = "https://confused-cold-territory.glitch.me";
 
 // Spotify login initiation
 document.getElementById("login").addEventListener("click", () => {
