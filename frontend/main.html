@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpotiStats - Track your Spotify stats</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="Eo_circle_green_letter-s.svg.png">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body>
+    <div id="app">
+        <div id="recently-played">
+            <h2>Recently Played</h2>
+            <ul id="recent-songs-list"></ul>
+        </div>
+        <button id="logout">Logout</button>
+        <div id="current-info">
+            <button id="mobile-logout">Logout</button>
+            <h1 id="currently-playing">Currently Playing</h1>
+            <div id="song-info">
+                <img id="album-cover" src="" alt="Album Cover" style="width: 200px; height: 200px; margin-bottom: 10px;">
+                <div id="song-details">
+                    <p id="song-title">
+                        <a href="#" id="song-link">No song playing</a>
+                    </p>
+                    <p id="artist-name">Artist Name</p>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="prev-button" class="spotify-button">
+                    <span class="material-symbols-outlined">skip_previous</span>
+                </button>
+                <button id="play-pause-button" class="spotify-button">
+                    <span class="material-symbols-outlined" id="play-pause-icon">play_arrow</span>
+                </button>
+                <button id="next-button" class="spotify-button">
+                    <span class="material-symbols-outlined">skip_next</span>
+                </button>
+            </div>            
+            <div id="slider-container">
+                <div id="time-container">
+                    <span id="current-time">0:00</span>
+                    <input type="range" id="song-slider" min="0" value="0"/>
+                    <span id="total-time">0:00</span>
+                </div>
+            </div>
+        </div>
+        <h2 id="lyrics-tab" styles="display: none;">Lyrics</h2>
+        <div id="lyrics-container">
+            <h2 id="desktop-lyrics-tab">Lyrics</h2>
+            <div id="lyrics">No lyrics available</div>
+        </div>
+    </div>  
+    <script src="script.js"></script>
+</body>
+</html>

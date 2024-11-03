@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="signuplogin.css">
+</head>
+<body>
+    <div id="welcome-container">
+        <h1 id="welcome-text">Welcome to SpotiStats</h1>
+        <p>Discover your favorite songs, artists, and more with real-time data.</p>
+        <p>Track your recent listening history and see how your taste evolves over time.</p>
+        <button id="login" class="login-btn">Login with Spotify</button>
+        <footer>
+            <p>By continuing, you agree to our <a href="terms_of_service.html">Terms of Service</a> and <a href="privacy_policy.html">Privacy Policy</a>.</p>
+        </footer>
+    </div>
+    <script src="logic.js"></script>
+    <script>
+        // After the page loads
+window.addEventListener("load", () => {
+    // Get access token from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const accessToken = urlParams.get("access_token");
+
+    if (accessToken) {
+        // Store the access token in local storage
+        localStorage.setItem("access_token", accessToken);
+        // You can also fetch user data here if needed
+    }
+});
+    </script>
+</body>
+</html>
