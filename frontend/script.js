@@ -1,8 +1,3 @@
-const CLIENT_ID = '8af5d68c29394b498a58679e13e1d03b';
-const REDIRECT_URI = 'http://127.0.0.1:5500/frontend/index.html';
-//http://127.0.0.1:5500/index.html
-//https://spotistats.dev/
-const SCOPES = 'user-read-currently-playing user-read-recently-played user-modify-playback-state';
 let fetchInterval;
 let recentSongsInterval;
 
@@ -70,6 +65,7 @@ if (accessToken) {
         document.getElementById('current-info').style.height = '100%';
         document.getElementById('welcome-container').style.display = 'none';
     }
+    window.history.replaceState({}, document.title, window.location.pathname);
 } else {
     console.error("Access token not found in URL");
 }
