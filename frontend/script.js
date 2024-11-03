@@ -1,3 +1,8 @@
+const CLIENT_ID = '8af5d68c29394b498a58679e13e1d03b';
+const REDIRECT_URI = 'https://spotistats.dev/';
+//http://127.0.0.1:5500/index.html
+//https://spotistats.dev/
+const SCOPES = 'user-read-currently-playing user-read-recently-played user-modify-playback-state';
 let fetchInterval;
 let recentSongsInterval;
 
