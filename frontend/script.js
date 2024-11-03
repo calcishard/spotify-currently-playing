@@ -69,7 +69,7 @@ if (accessToken) {
         document.getElementById('current-info').style.width = '100%';
         document.getElementById('current-info').style.height = '100%';
     }
-    window.history.replaceState({}, document.title, window.location.pathname);
+    window.history.replaceState({}, document.title, "/");
 } else {
     console.error("Access token not found in URL");
 }
