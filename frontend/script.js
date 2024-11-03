@@ -68,7 +68,6 @@ if (accessToken) {
         mobileLogoutButton.style.display = 'block';
         document.getElementById('current-info').style.width = '100%';
         document.getElementById('current-info').style.height = '100%';
-        document.getElementById('welcome-container').style.display = 'none';
     }
     window.history.replaceState({}, document.title, window.location.pathname);
 } else {
@@ -265,28 +264,6 @@ function displayRecentSongs(songs) {
         recentSongsList.appendChild(songElement);
     });
 }
-
-// Event listeners for play/pause and next/previous buttons
-playPauseButton.addEventListener('click', async () => {
-    if (accessToken) {
-        try {
-            const response = await fetch('https://api.spotify.com/v1/me/player/play', {
-                method: 'PUT',
-                headers: {
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            });
-            if (response.ok) {
-                // Update the icon to indicate the song is playing
-                playPauseIcon.textContent = 'pause';
-            } else {
-                console.error('Error playing the song:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error playing the song:', error);
-        }
-    }
-});
 
 // Fetch access token from backend when redirected
 async function fetchAccessToken() {

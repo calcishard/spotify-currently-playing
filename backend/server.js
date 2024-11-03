@@ -63,6 +63,7 @@ passport.use(
                 "user-read-currently-playing",
                 "user-read-recently-played",
                 "user-modify-playback-state",
+                "user-read-playback-state",
                 "user-read-email",
                 "user-read-private",
             ],
