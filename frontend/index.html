@@ -19,16 +19,12 @@
     </div>
     <script src="logic.js"></script>
     <script>
-        // After the page loads
 window.addEventListener("load", () => {
-    // Get access token from URL
     const urlParams = new URLSearchParams(window.location.search);
     const accessToken = urlParams.get("access_token");
 
     if (accessToken) {
-        // Store the access token in local storage
         localStorage.setItem("access_token", accessToken);
-        // You can also fetch user data here if needed
     }
 });
     </script>

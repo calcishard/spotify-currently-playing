@@ -1,4 +1,3 @@
-// Load environment variables
 require("dotenv").config();
 
 const express = require("express");
@@ -6,35 +5,31 @@ const mongoose = require("mongoose");
 const passport = require("passport");
 const SpotifyStrategy = require("passport-spotify").Strategy;
 const jwt = require("jsonwebtoken");
-const cors = require("cors"); // Ensure you have this line
-const session = require("express-session"); // Add express-session
-const path = require("path"); // Require path module
+const cors = require("cors"); 
+const session = require("express-session"); 
+const path = require("path"); 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Use CORS middleware
 app.use(cors({
-    origin: 'http://127.0.0.1:5500', // Allow requests from this origin
-    credentials: true // Allow credentials if you're using sessions
+    origin: 'http://127.0.0.1:5500',
+    credentials: true
 }));
 app.use(express.json());
 
-// Configure session middleware
 app.use(session({
-    secret: process.env.SESSION_SECRET  , // Replace with your secret key
+    secret: process.env.SESSION_SECRET  ,
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: process.env.NODE_ENV === 'production' } // Set to true if using HTTPS
+    cookie: { secure: process.env.NODE_ENV === 'production' }
 }));
 
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Serve static files from the frontend directory
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -42,7 +37,6 @@ mongoose.connect(process.env.MONGODB_URI, {
 .then(() => console.log("Connected to MongoDB"))
 .catch((error) => console.error("MongoDB connection error:", error));
 
-// User schema and model
 const userSchema = new mongoose.Schema({
     spotifyId: { type: String, unique: true },
     displayName: String,
@@ -69,7 +63,7 @@ passport.use(
             ],
         },
         async (accessToken, refreshToken, expires_in, profile, done) => {
-            console.log("Access Token Received:", accessToken); // Debug log
+            console.log("Access Token Received:", accessToken); 
             try {
                 let user = await User.findOne({ spotifyId: profile.id });
                 if (!user) {
@@ -80,10 +74,10 @@ passport.use(
                         country: profile.country,
                         product: profile.product,
                         profileImage: profile.photos[0] ? profile.photos[0].url : null,
-                        accessToken: accessToken, // Store the access token here
+                        accessToken: accessToken, 
                     }).save();
                 } else {
-                    user.accessToken = accessToken; // Update access token on each login
+                    user.accessToken = accessToken; 
                     await user.save();
                 }
                 done(null, user);
@@ -96,7 +90,6 @@ passport.use(
 );
 
 
-// Serialize and deserialize user instances to and from session
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
@@ -111,30 +104,26 @@ passport.deserializeUser((id, done) => {
         });
 });
 
-// Spotify Authentication Routes
 app.get("/auth/spotify", passport.authenticate("spotify"));
 
 app.get(
     "/auth/spotify/callback",
     passport.authenticate("spotify", { failureRedirect: "/" }),
     (req, res) => {
-        console.log("User in callback:", req.user); // Log the user object
+        console.log("User in callback:", req.user);
 
-        // Check if the user is authenticated
         if (!req.user) {
             console.error("User in callback: undefined");
-            return res.redirect("/"); // Handle error or redirect
+            return res.redirect("/");
         }
 
-        const accessToken = req.user.accessToken; // Safely access the access token
+        const accessToken = req.user.accessToken;
         console.log("Access Token:", accessToken);
         
-        // Redirect to main.html on the other server and include the token in local storage
         res.redirect(`http://127.0.0.1:5500/frontend/main.html?access_token=${accessToken}`);
     }
 );
 
-// Start the server
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });

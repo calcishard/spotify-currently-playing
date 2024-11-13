@@ -1,11 +1,9 @@
-/* Reset */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body styling */
 body {
     display: flex;
     justify-content: center;
@@ -16,7 +14,6 @@ body {
     color: #ffffff;
 }
 
-/* Welcome container */
 #welcome-container {
     background-color: #1e1e1e;
     padding: 2rem;
@@ -26,20 +23,17 @@ body {
     max-width: 500px;
 }
 
-/* Welcome text */
 #welcome-text {
     font-size: 2rem;
     margin-bottom: 1rem;
     color: #1DB954;
 }
 
-/* Paragraph styling */
 #welcome-container p {
     font-size: 1rem;
     margin: 0.5rem 0;
 }
 
-/* Login button */
 .login-btn {
     padding: 0.75rem 1.5rem;
     margin-top: 1rem;
@@ -57,7 +51,6 @@ body {
     background-color: #17a848;
 }
 
-/* Footer */
 footer {
     margin-top: 1rem;
     font-size: 0.9rem;
