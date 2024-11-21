@@ -89,7 +89,6 @@ async function fetchUserProfile() {
         }
         
         const data = await response.json();
-        console.log('User Profile:', data);
     } catch (error) {
         console.error('Error fetching user profile:', error);
     }
