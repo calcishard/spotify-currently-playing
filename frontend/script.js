@@ -30,7 +30,7 @@ function isMobileView() {
 
 // script.js
 
-// Function to get the query parameters from the URL
+//get the query parameters from the URL
 function getQueryParams() {
     const params = {};
     const queryString = window.location.search.slice(1);
@@ -43,16 +43,14 @@ function getQueryParams() {
     return params;
 }
 
-// Extract access token from the URL
+//extract access token from the URL
 const params = getQueryParams();
 let accessToken = params.access_token;
 
 if (accessToken) {
-    // Store the access token in local storage
+    //store the access token in local storage
     localStorage.setItem('access_token', accessToken);
-    console.log("Access Token:", accessToken);
     
-    // Optionally: Call a function to fetch user data after storing the token
     fetchUserProfile(accessToken);
         //fetching data
     fetchCurrentlyPlaying(accessToken);
@@ -74,14 +72,14 @@ if (accessToken) {
     console.error("Access token not found in URL");
 }
 
-// Function to fetch user profile data from Spotify API
+//fetch user profile data from Spotify API
 async function fetchUserProfile() {
     const token = localStorage.getItem('access_token');
     try {
         const response = await fetch('https://api.spotify.com/v1/me', {
             method: 'GET',
             headers: {
-                Authorization: `Bearer ${token}`, // Include the access token
+                Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         });
@@ -92,7 +90,6 @@ async function fetchUserProfile() {
         
         const data = await response.json();
         console.log('User Profile:', data);
-        // Handle user profile data here
     } catch (error) {
         console.error('Error fetching user profile:', error);
     }
@@ -268,13 +265,12 @@ function displayRecentSongs(songs) {
 // Fetch access token from backend when redirected
 async function fetchAccessToken() {
     try {
-        const response = await fetch('http://localhost:3000/auth/spotify/callback'); // Adjust the URL as necessary
+        const response = await fetch('http://localhost:3000/auth/spotify/callback');
         if (!response.ok) throw new Error('Failed to retrieve access token');
 
         const data = await response.json();
-        accessToken = data.access_token; // Make sure the backend sends the access token in this format
+        accessToken = data.access_token;
 
-        // Start fetching data
         fetchCurrentlyPlaying(accessToken);
         fetchRecentSongs(accessToken);
         checkIfSongIsPlaying(accessToken);
@@ -289,21 +285,20 @@ async function fetchAccessToken() {
     }
 }
 
-// Call the function to fetch the access token if on the main page
 window.addEventListener('load', () => {
-    if (window.location.pathname === '/frontend/main.html') { // Adjust this to match your actual path
+    if (window.location.pathname === '/frontend/main.html') {
         fetchAccessToken();
     }
 });
 
-// Logout function
+//logout
 function logout() {
     accessToken = null;
     window.location.hash = '';
     const logoutWindow = window.open('https://accounts.spotify.com/logout', '_blank');
     setTimeout(() => {
         logoutWindow.close();
-        window.location.href = REDIRECT_URI; // Redirect
+        window.location.href = REDIRECT_URI;
     }, 1000);
 }
 
